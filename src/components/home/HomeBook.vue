@@ -56,7 +56,7 @@
   export default {
     components: {ImageView},
     mounted () {
-      console.log(this.bookData)
+      // console.log(this.bookData)
     },
     props: {
       title: String,

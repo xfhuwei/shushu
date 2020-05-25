@@ -1,7 +1,36 @@
-import { get } from '@/utils/request'
+import { get, post } from '@/utils/request'
+import { APP_ID, APP_SECRET } from '@/utils/const'
 
 const API_URL = 'https://test.youbaobao.xyz:18081'
 
-export function geHomeData (params) {
+export function getHomeData (params) {
   return get(`${API_URL}/book/home/v2`, params)
+}
+
+export function recommend (params) {
+  return get(`${API_URL}/book/home/recommend/v2`)
+}
+
+export function freeRead (params) {
+  return get(`${API_URL}/book/home/freeRead/v2`)
+}
+
+export function hotBook (params) {
+  return get(`${API_URL}/book/home/hotBook/v2`)
+}
+
+export function getOpenId (code) {
+  return get(`${API_URL}/openId/get`, {
+    appId: APP_ID,
+    secret: APP_SECRET,
+    code: code
+  })
+}
+
+export function register (openId, userInfo) {
+  return post(`${API_URL}/user/register`, {
+    openId,
+    platform: mpvuePlatform,
+    ...userInfo
+  }).then((res) => { console.log(res) })
 }

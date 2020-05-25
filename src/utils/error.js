@@ -1,7 +1,7 @@
 import store from '../store'
 
 // vue级别异常捕获
-export function errorHandler(err, vm, info) {
+export function errorHandler (err, vm, info) {
   // 打印异常数据
   if (console && console.log) {
     console.log('errorHandler', err, info)
@@ -15,7 +15,7 @@ export function errorHandler(err, vm, info) {
 }
 
 // 应用级异常捕获
-export function onError(err) {
+export function onError (err) {
   console.log('wx.onError', err)
   // 向子组件分发异常处理事件
   if (err) {
@@ -36,7 +36,7 @@ export function onError(err) {
 }
 
 // 想Vuex发送错误通知
-export function setError(message) {
+export function setError (message) {
   mpvue.hideLoading()
   store.commit('setError', message)
 }

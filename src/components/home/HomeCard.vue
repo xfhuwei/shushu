@@ -4,31 +4,26 @@
       <div class="userinfo">
         <div class="acater-wrapper">
           <ImageView
-            src="https://www.youbaobao.xyz/mpvue-res/logo.jpg"
+            :src="avatar"
             round
+            height="100%"
+            mode="scaleToFill"
           />
         </div>
-        <div class="nickname">{{ '米老鼠' }}</div>
-        <div class="shelf-text">书架共有{{3}}本好书</div>
+        <div class="nickname">{{nickname}}</div>
+        <div class="shelf-text">书架共有{{data.num? data.num: 0}}本好书</div>
         <div class="round-item"></div>
         <div class="shelf-text">特别精选</div>
       </div>
       <div class="bookinfo">
         <div class="book-wrapper">
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
-          </div>
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
-          </div>
-          <div class="book-img-wrapper">
-            <ImageView
-              src="https://www.youbaobao.xyz/book/res/img//EarthSciences/978-981-10-3713-9_CoverFigure.jpg"
-            />
+          <div
+            class="book-img-wrapper"
+            v-for="(book, index) of bookList"
+            :key="index"
+            @click="onBookClick(book)"
+          >
+            <ImageView :src="book.cover" />
           </div>
         </div>
         <div class="shelf-wrapper">
@@ -50,10 +45,6 @@
     components: {ImageView},
     props: {
       data: Object,
-      // num: {
-      //   type: Number,
-      //   default: 0
-      // },
       hasSign: { // 签到天数
         type: Boolean,
         default: false
@@ -68,13 +59,24 @@
         platform: mpvuePlatform
       }
     },
+    computed: {
+      avatar () {
+        return (this.data && this.data.userInfo && this.data.userInfo.avatarUrl) || ''
+      },
+      nickname () {
+        return (this.data && this.data.userInfo && this.data.userInfo.nickName) || ''
+      },
+      bookList () {
+        return (this.data && this.data.bookList) || []
+      }
+    },
     methods: {
       gotoShelf () {
         // 跳转到书架页
         // this.$router.push('/pages/shelf/main')
       },
       onBookClick (book) {
-        this.$emit('onBookClick', book)
+        this.$emit('onClick', book)
       },
       sign () {
         this.$emit('onSignClick')

@@ -1,3 +1,6 @@
+export const APP_ID = 'wx18a7b40b542764bc'
+export const APP_SECRET = 'c9d88ca2c6d8c23170238947c61aa332'
+
 export const CID = 2
 
 export const HOME_BOOK_MODE = {

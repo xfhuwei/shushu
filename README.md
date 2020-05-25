@@ -1,5 +1,3 @@
-# y
-
 > A Mpvue project
 
 ## Build Setup

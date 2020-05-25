@@ -1,6 +1,6 @@
 <template>
-  <div class="image-view" @click="onClick">
-    <img 
+  <div class="image-view" @click="onClick" :style="{ height }">
+    <img
       :class="round? 'round image' : 'image'"
       :style="{ height }"
       :src="src"
@@ -10,10 +10,10 @@
       @error="onError"
       v-show="!isLoading && !error"
     />
-    <img 
+    <img
       :class="round? 'round image' : 'image'"
       :style="{ height }"
-      src="/static/images/loading.jpeg"
+      src="/static/images/shusu.jpg"
       :mode="mode"
       :lazy-load="lazyload"
       v-show="isLoading || error"
@@ -46,7 +46,14 @@
       }
     },
     watch: {
-      src (newValue, oldValue) {}
+      src (newValue, oldValue) {
+        if (newValue && newValue.length > 0 && newValue !== oldValue) {
+          this.$nextTick(() => {
+            this.isLoading = true
+            this.error = false
+          })
+        }
+      }
     },
     data () {
       return {
