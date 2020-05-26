@@ -70,3 +70,10 @@ export function showLoading (title) {
 export function hideLoading (title) {
   mpvue.hideLoading()
 }
+
+export function showToast (title) {
+  mpvue.showToast({
+    title,
+    duration: 2000
+  })
+}

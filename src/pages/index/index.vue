@@ -10,7 +10,7 @@
         :data="homeCard"
       />
       <HomeBanner
-        title="这是 mpvue 写的小程序呀"
+        title="mpvue"
         subTitle="立即体验"
         img="http://www.youbaobao.xyz/book/res/bg.jpg"
         @onClick="onBannerClick"
@@ -205,8 +205,13 @@
       onHomeBookClick () {
         console.log('点击了书本')
       },
-      onSeachBarkClick () {
-        // 跳转到搜索页面
+      onSearchBarClick () {
+        this.$router.push({
+          path: '/pages/search/main',
+          query: {
+            hotSearch: this.hotSearch
+          }
+        })
       },
       onBannerClick () {
         console.log('点击了Banner')
