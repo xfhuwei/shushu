@@ -8,6 +8,7 @@
       />
       <HomeCard
         :data="homeCard"
+        @onClick="onHomeBookClick"
       />
       <HomeBanner
         title="mpvue"
@@ -202,8 +203,13 @@
       onCategoryMoreClick () {
         // console.log('点击了换一批')
       },
-      onHomeBookClick () {
-        console.log('点击了书本')
+      onHomeBookClick (book) {
+        this.$router.push({
+          path: '/pages/detail/main',
+          query: {
+            fileName: book.fileName
+          }
+        })
       },
       onSearchBarClick () {
         this.$router.push({
