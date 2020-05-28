@@ -33,6 +33,12 @@
     },
     methods: {
       onClick (book) {
+        this.$router.push({
+          path: '/pages/detail/main',
+          query: {
+            fileName: book.fileName
+          }
+        })
         this.$emit('onClick', book)
       }
     }

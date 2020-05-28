@@ -40,7 +40,7 @@
     bookDetail,
     bookRankSave,
     bookContents,
-    bookIsInShelf,
+    bookShelf,
     bookShelfSave,
     bookShelfRemove
   } from '../../api/index'
@@ -87,8 +87,26 @@
           })
         }
       },
-      readBook (nav) {
-        console.log(nav)
+      readBook (href) {
+        const query = {
+          fileName: this.data.fileName,
+          opf: this.data.opf
+        }
+        if (href) {
+          const index = href.indexOf('/')
+          if (index >= 0) {
+            query.navigation = href.slice(index + 1)
+          } else {
+            query.navigation = href
+          }
+        }
+        if (this.data && this.data.fileName) {
+          console.log(this.data)
+          this.$router.push({
+            path: '/pages/read/main',
+            query
+          })
+        }
       },
       handleShelf () {
         const openId = getStorageSync('openid')
@@ -120,7 +138,7 @@
         const openId = getStorageSync('openid')
         const { fileName } = this.$route.query
         if (openId && fileName) {
-          bookIsInShelf({openId, fileName}).then(res => {
+          bookShelf({openId, fileName}).then(res => {
             const data = res.data.data
             data.length === 0 ? this.isInShelf = false : this.isInShelf = true
           })

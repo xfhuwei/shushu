@@ -61,7 +61,7 @@
           mode="category"
           btn-text="查看全部"
           @onMoreClick="onCategoryMoreClick"
-          @onBookClick="onHomeBookClick"
+          @onBookClick="onCategoryClick"
         />
       </div>
     </div>
@@ -201,13 +201,25 @@
         })
       },
       onCategoryMoreClick () {
-        // console.log('点击了换一批')
+        this.$router.push({
+          path: '/pages/categoryList/main'
+        })
       },
       onHomeBookClick (book) {
         this.$router.push({
           path: '/pages/detail/main',
           query: {
             fileName: book.fileName
+          }
+        })
+      },
+      onCategoryClick (category) {
+        this.$router.push({
+          path: '/pages/list/main',
+          query: {
+            key: 'categoryId',
+            text: category.category,
+            title: category.categoryText
           }
         })
       },
