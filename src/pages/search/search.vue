@@ -20,7 +20,7 @@
         :value="hotSearchArray"
         header-text="热门搜索"
         btn-text="换一批"
-        @onTagClick="showBookDetail"
+        @onTagClick="searchKeyWord"
         @onBtnClick="changeHotSearch"
         v-if="hotSearchArray.length > 0 && !showList"
       ></TagGroup>
